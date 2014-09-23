@@ -23,12 +23,9 @@ class Scrabble
 
   def self.score_words(array_of_words)
     array_of_words.collect do |word|
-      total = 0
       @@world_totals = {}
-      word.upcase.split(//).collect do |letter|
-        total += LETTER_HASH[letter]
-      end
-       @@word_totals[word]= total
+      total= score(word)
+      @@word_totals[word]= total
     end
     score_compare
   end
@@ -38,29 +35,27 @@ class Scrabble
 
      @@word_totals.each do |key, value|
        if value > winner_value
-         new_winner_key = key
-         @@winner_key_num = new_winner_key.length
-         new_winner_value = value
-         winner_value = new_winner_value
-         puts "The new key is #{key} with a value of #{value}."
+         #new_winner_key = key
+         #@@winner_key_num = key.length
+         #new_winner_value = value
+         winner_value = value
+         #puts "The new key is #{key} with a value of #{value}."
          @@winner_key = key
-       elsif !@winner_key_num == 7 && key.length <= @@winner_key_num && value >= winner_value
-         puts key
-         puts key.length
-         puts value
-         new_winner_key = key
-         @@winner_key_num = new_winner_key.length
-         new_winner_value = value
-         winner_value = new_winner_value
+       elsif @@winner_key.length != 7 && key.length == @@winner_key.length && value >= winner_value
+         #new_winner_key = key
+         #@@winner_key_num = new_winner_key.length
+         #new_winner_value = value
+         winner_value = value
          puts "The new key is #{key} with a value of #{value}."
          @@winner_key = key
        elsif key.length == 7 && value >= winner_value
-          new_winner_key = key
-          @@winner_key_num = new_winner_key.length
-          new_winner_value = value
-          winner_value = new_winner_value
-          puts "The new key is #{key} with a value of #{value}."
-          @@winner_key = key
+         #new_winner_key = key
+         #@@winner_key_num = new_winner_key.length
+         winner_value = value
+         #winner_value = new_winner_value
+         #puts "The new key is #{key} with a value of #{value}."
+         @@winner_key = key
+
        end
        @@word_totals = {}
      end
