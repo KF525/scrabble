@@ -4,7 +4,6 @@ class Scrabble
   "V"=>4, "W"=>4, "Y"=>4, "K"=>5, "J"=>8, "X"=>8, "Q"=>10, "Z"=>10}
 
   @@word_totals = {}
-  @@winner_key_num = 6
   @@winner_key = nil
 
 
