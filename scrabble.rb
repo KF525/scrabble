@@ -4,6 +4,8 @@ class Scrabble
   "V"=>4, "W"=>4, "Y"=>4, "K"=>5, "J"=>8, "X"=>8, "Q"=>10, "Z"=>10}
 
   @@word_totals = {}
+  @@winner_key_num = 6
+  @@winner_key = nil
 
 
   def self.split(word)
@@ -19,22 +21,54 @@ class Scrabble
     total
   end
 
-  def self.add_words(array_of_words)
+  def self.score_words(array_of_words)
     array_of_words.collect do |word|
       total = 0
       @@world_totals = {}
       word.upcase.split(//).collect do |letter|
         total += LETTER_HASH[letter]
       end
-      @@word_totals[word]= total
+       @@word_totals[word]= total
     end
+    score_compare
+  end
+
+  def self.score_compare
+     winner_value = 0
+
+     @@word_totals.each do |key, value|
+       if value > winner_value
+         new_winner_key = key
+         @@winner_key_num = new_winner_key.length
+         new_winner_value = value
+         winner_value = new_winner_value
+         puts "The new key is #{key} with a value of #{value}."
+         @@winner_key = key
+       elsif !@winner_key_num == 7 && key.length <= @@winner_key_num && value >= winner_value
+         puts key
+         puts key.length
+         puts value
+         new_winner_key = key
+         @@winner_key_num = new_winner_key.length
+         new_winner_value = value
+         winner_value = new_winner_value
+         puts "The new key is #{key} with a value of #{value}."
+         @@winner_key = key
+       elsif key.length == 7 && value >= winner_value
+          new_winner_key = key
+          @@winner_key_num = new_winner_key.length
+          new_winner_value = value
+          winner_value = new_winner_value
+          puts "The new key is #{key} with a value of #{value}."
+          @@winner_key = key
+       end
+       @@word_totals = {}
+     end
   end
 
   def self.highest_score_from(array_of_words)
-    add_words(array_of_words)
+    score_words(array_of_words)
 
-    @@word_totals.sort_by{|k,v| v}.last.first
+    return @@winner_key
   end
 end
-
-#need to do something about WORD TOTALS constant

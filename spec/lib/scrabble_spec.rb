@@ -26,17 +26,18 @@ describe Scrabble do
     it "returns word with highest score" do
       expect(Scrabble.highest_score_from(["READ", "EAR"])).to eq "READ"
     end
-    context "if top scores are tied" do
-      it "choose shortest word" do
-        expect(Scrabble.highest_score_from(["JETS", "MAKER"])).to eq "JETS"
+    context "if top scores same length" do
+      it "choose first word" do
+        expect(Scrabble.highest_score_from(["CASE", "CALL"])).to eq "CASE"
       end
     end
-    # context "if top scores are tied, choose fewest tiles" do
-    #   expect(Scrabble.highest_score_from(["READ", "PET"])).to eq "PET"
-    # end
-    # context "unless one uses all seven tiles" do
-    # end
-    # context "if multiple have same score and length, go with first" do
-    # end
+    context "if top scores are tied" do
+      it "choose shortest word if no seven-letter words" do
+        expect(Scrabble.highest_score_from(["JETS", "MAKER"])).to eq "JETS"
+      end
+      it "choose seven-letter word" do
+        expect(Scrabble.highest_score_from(["BLIGHTS", "JESTER"])).to eq "BLIGHTS"
+      end
+    end
   end
 end
