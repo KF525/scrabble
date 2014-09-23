@@ -34,28 +34,19 @@ class Scrabble
      winner_value = 0
 
      @@word_totals.each do |key, value|
+       #if value in hash is larger than current winner_value
        if value > winner_value
-         #new_winner_key = key
-         #@@winner_key_num = key.length
-         #new_winner_value = value
          winner_value = value
-         #puts "The new key is #{key} with a value of #{value}."
          @@winner_key = key
-       elsif @@winner_key.length != 7 && key.length == @@winner_key.length && value >= winner_value
-         #new_winner_key = key
-         #@@winner_key_num = new_winner_key.length
-         #new_winner_value = value
+       #if word length in hash is not 7 and current word length is not 7
+       #and word length in hash is shorter and value is greater or equal to current winner_value
+       elsif key.length != 7 && @@winner_key.length != 7 && @@winner_key.length > key.length && value >= winner_value
          winner_value = value
-         puts "The new key is #{key} with a value of #{value}."
          @@winner_key = key
+       #if word length in hash is 7 and value is greater or equal to current winner_value
        elsif key.length == 7 && value >= winner_value
-         #new_winner_key = key
-         #@@winner_key_num = new_winner_key.length
          winner_value = value
-         #winner_value = new_winner_value
-         #puts "The new key is #{key} with a value of #{value}."
          @@winner_key = key
-
        end
        @@word_totals = {}
      end
