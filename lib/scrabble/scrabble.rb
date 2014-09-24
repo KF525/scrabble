@@ -33,16 +33,12 @@ class Scrabble
      winner_value = 0
 
      @@word_totals.each do |key, value|
-       #if value in hash is larger than current winner_value
        if value > winner_value
          winner_value = value
          @@winner_key = key
-       #if word length in hash is not 7 and current word length is not 7
-       #and word length in hash is shorter and value is greater or equal to current winner_value
        elsif key.length != 7 && @@winner_key.length != 7 && @@winner_key.length > key.length && value >= winner_value
          winner_value = value
          @@winner_key = key
-       #if word length in hash is 7 and value is greater or equal to current winner_value
        elsif key.length == 7 && value >= winner_value
          winner_value = value
          @@winner_key = key

@@ -1,4 +1,4 @@
-require './scrabble'
+require './lib/scrabble/scrabble'
 
 describe Scrabble do
 

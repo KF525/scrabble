@@ -4,15 +4,14 @@ class Player
   def initialize(name)
     @name = name
     @word_array = []
+    @total = 0
   end
 
   def total_score
-    total = 0
-
     Scrabble.score_words(@word_array).collect do |key, value|
-      total += value
+      @total += value
     end
-    total
+    @total
   end
 
   def plays
@@ -20,12 +19,14 @@ class Player
   end
 
   def play(word)
-    @word_array<<(word)
+    @word_array<<(word.upcase)
   end
 
-  # def won?
-  #   if total_score >= 100
-  #     true
-  #   end
-  # end
+  def won?
+    if @total >= 100
+      true
+    else
+      puts @total
+    end
+  end
 end
